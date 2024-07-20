@@ -1,0 +1,94 @@
+// Crud strored procedure
+
+CREATE OR ALTER PROCEDURE[dbo].[AddStudent]
+@StudentName NVARCHAR(MAX), 
+@StudentEmail NVARCHAR(MAX),
+@Course NVARCHAR(MAX),
+@PhoneNumber NVARCHAR(MAX)
+
+AS
+BEGIN 
+	INSERT INTO dbo.Student
+		(
+			StudentName,
+			StudentEmail,
+			Course,
+			PhoneNumber
+		)
+	VALUES
+		(
+			@StudentName, 
+			@StudentEmail, 
+			@Course, 
+			@PhoneNumber
+
+
+		)
+END
+GO
+
+
+
+CREATE OR ALTER PROCEDURE[dbo].[GetStudentIdByID]
+@StudentId int
+
+AS
+BEGIN 
+	SELECT
+		StudentId,
+		StudentName, 
+		StudentEmail, 
+		Course,
+		PhoneNumber
+		
+
+	FROM dbo.Student WHERE StudentId = @StudentId
+
+END
+GO
+
+
+
+CREATE OR ALTER PROCEDURE [dbo].[UpdateStudent]
+@StudentId INT,
+@StudentName NVARCHAR(MAX), 
+@StudentEmail NVARCHAR(MAX),
+@Course NVARCHAR(MAX),
+@PhoneNumber NVARCHAR(MAX)
+AS
+BEGIN 
+	UPDATE dbo.Student 
+	SET
+		StudentName = @StudentName, 
+		StudentEmail = @StudentEmail, 
+		Course = @Course,
+		PhoneNumber = @PhoneNumber
+
+	WHERE StudentId = @StudentId
+
+END
+
+
+CREATE OR ALTER PROCEDURE [dbo].[DeleteStudentByID]
+@StudentId int
+
+AS
+BEGIN
+	DELETE FROM dbo.Student WHERE StudentId = @StudentId
+
+END
+
+
+CREATE OR ALTER PROCEDURE [dbo].[GetStudentList]
+AS
+BEGIN
+    SELECT
+        StudentId,
+        StudentName,
+        StudentEmail,
+        Course,
+        PhoneNumber
+    FROM
+        dbo.Student;
+END
+
